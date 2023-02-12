@@ -1,0 +1,20 @@
+{
+  "name": "expresstutorials",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Just-StyX/express-tut.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Just-StyX/express-tut/issues"
+  },
+  "homepage": "https://github.com/Just-StyX/express-tut#readme"
+}
