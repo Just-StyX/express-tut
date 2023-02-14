@@ -1,7 +1,7 @@
 const path = require('path')
 const BlogPost = require('../dataBaseModels/blogPost')
 
-const user = {
+const post = {
     async homePage(req, res) {
         const blogposts = await BlogPost.find({})
         res.render('index', {
@@ -40,4 +40,4 @@ const user = {
     }
 }
 
-module.exports = user
+module.exports = post

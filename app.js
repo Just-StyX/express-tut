@@ -3,7 +3,8 @@ const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload')
-const userRoutes = require('./handlers/blogPostRoutes');
+const postRoutes = require('./handlers/blogPostRoutes');
+const userRoutes = require('./handlers/userRoutes');
 const customMiddleware = require('./middlewares/middlewares');
 
 const PORT = process.env.PORT || 3000
@@ -21,12 +22,19 @@ app.use(fileUpload({
 }))
 app.use(customMiddleware.validatePostForm)
 
-app.get('/', userRoutes.homePage)
-app.get('/about', userRoutes.aboutPage)
-app.get('/contact', userRoutes.contactPage)
-app.get('/post/new', customMiddleware.validatePostForm, userRoutes.createPost)
-app.post('/post/store', userRoutes.postStore)
-app.get('/post/:id', userRoutes.postPage)
+
+// post routes
+app.get('/', postRoutes.homePage)
+app.get('/about', postRoutes.aboutPage)
+app.get('/contact', postRoutes.contactPage)
+app.get('/post/new', customMiddleware.validatePostForm, postRoutes.createPost)
+app.post('/post/store', postRoutes.postStore)
+app.get('/post/:id', postRoutes.postPage)
+
+
+// user routes
+app.get('/auth/register', userRoutes.registerUser)
+app.post('/users/register', userRoutes.doRegister)
 
 
 app.listen(PORT, function(err){
