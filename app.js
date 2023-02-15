@@ -35,6 +35,8 @@ app.get('/post/:id', postRoutes.postPage)
 // user routes
 app.get('/auth/register', userRoutes.registerUser)
 app.post('/users/register', userRoutes.doRegister)
+app.get('/auth/login', userRoutes.userLogin)
+app.post('/users/login', userRoutes.doLogin)
 
 
 app.listen(PORT, function(err){
