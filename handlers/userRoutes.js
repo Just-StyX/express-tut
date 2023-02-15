@@ -25,7 +25,7 @@ const user = {
             if(user) {
                 bcrypt.compare(password, user.password, (errore, same) => {
                     if(same) {
-                        //store user session
+                        req.session.userId = user._id
                         res.redirect('/')
                     } else {
                         res.redirect('/auth/login')
@@ -34,6 +34,12 @@ const user = {
             } else {
                 res.redirect('/auth/login')
             }
+        })
+    }, 
+
+    userLogout(req, res) {
+        req.session.destroy(() => {
+            res.redirect('/')
         })
     }
 }

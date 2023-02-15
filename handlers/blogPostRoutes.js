@@ -4,6 +4,7 @@ const BlogPost = require('../dataBaseModels/blogPost')
 const post = {
     async homePage(req, res) {
         const blogposts = await BlogPost.find({})
+        // console.log(req.session)
         res.render('index', {
             blogposts
         })
@@ -17,15 +18,18 @@ const post = {
         res.render('contact')
     },
 
-    postPage(req, res) {
-        const blogpost = BlogPost.findById(req.params.id)
+    async postPage(req, res) {
+        const blogpost = await BlogPost.findById(req.params.id)
             res.render('post', {
             blogpost
         })
     },
 
     createPost(req, res) {
-        res.render('create')
+        if(req.session.userId) {
+           return res.render('create')
+        }
+        res.redirect('/auth/login')
     },
 
     postStore(req, res) {
