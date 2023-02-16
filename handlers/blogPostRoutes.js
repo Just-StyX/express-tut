@@ -3,8 +3,9 @@ const BlogPost = require('../dataBaseModels/blogPost')
 
 const post = {
     async homePage(req, res) {
-        const blogposts = await BlogPost.find({})
-        // console.log(req.session)
+        const blogposts = await BlogPost.find({}).populate('userid')
+
+        console.log(req.session)
         res.render('index', {
             blogposts
         })
@@ -19,7 +20,7 @@ const post = {
     },
 
     async postPage(req, res) {
-        const blogpost = await BlogPost.findById(req.params.id)
+        const blogpost = await BlogPost.findById(req.params.id).populate('userid')
             res.render('post', {
             blogpost
         })
@@ -37,7 +38,8 @@ const post = {
         image.mv(path.resolve(__dirname, 'public/img', image.name), async (error) => {
             await BlogPost.create({
                 ...req.body,
-                image:'/img/' + image.name
+                image:'/img/' + image.name,
+                userid: req.session.userId
             })
             res.redirect('/')
         })

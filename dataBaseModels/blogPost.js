@@ -7,7 +7,11 @@ const blogPostSchema = Schema({
     subTitle: String,
     body: { type: String, required: true },
     createdAt: { type: Date, default: new Date() },
-    username: { type: String, required: true},
+    userid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     image: String
 })
 
